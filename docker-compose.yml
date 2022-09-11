@@ -42,5 +42,5 @@ services:
         environment:
           - CHOKIDAR_USEPOLLING=true
         command: npm start
-        # depends_on:
-        #   - db
+        depends_on:
+          - web
