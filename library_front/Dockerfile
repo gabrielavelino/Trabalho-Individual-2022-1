@@ -1,11 +1,12 @@
-# Imagem de Origem
-FROM node:12.18.1
-# Diretório de trabalho(é onde a aplicação ficará dentro do container).
+FROM node:16
 
-# Adicionando `/app/node_modules/.bin` para o $PATH
+WORKDIR /app
+ENV PATH=library_front/node_modules/.bin:$PATH
+COPY package.json ./
+COPY package-lock.json ./
+COPY ./ ./
 
-# Instalando dependências da aplicação e armazenando em cache.
+RUN npm install
 
-RUN npm install 
-# Inicializa a aplicação
+EXPOSE 3000
 CMD ["npm", "start"]

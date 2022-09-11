@@ -11,9 +11,9 @@ services:
       - POSTGRES_PASSWORD=postgres
   web:
     build: ./library_back
-    command: python manage.py runserver 0.0.0.0:8000
+
     volumes:
-      - .:/code
+      - ./library_back:/code
     ports:
       - "8000:8000"
     environment:
@@ -22,8 +22,12 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db    
+
   front_service:
         build: ./library_front
-        command: npm start
+        container_name: library_front
+        volumes: 
+          - ./library_front:/app
+        command: ["npm", "start"]
         ports:
           - "3000:3000"
